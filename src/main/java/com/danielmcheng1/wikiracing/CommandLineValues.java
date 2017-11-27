@@ -10,7 +10,7 @@ public class CommandLineValues {
     private String sourceTitle;
     @Option(name = "-destTitle", required = false, usage = "Specify the destination Wikipedia title")
     private String destTitle;
-    @Option(name = "-timeout", required = false, usage = "Specify optional timeout(s) for crawler to stop (defaults to 60s)")
+    @Option(name = "-timeout", required = false, usage = "Specify optional timeout(s) for crawler to stop (defaults to 15s)")
     private Long timeout;
     @Option(name = "-startREST", required = false, usage = "Specify optional flag as Y to start the REST service")
     private String startREST;

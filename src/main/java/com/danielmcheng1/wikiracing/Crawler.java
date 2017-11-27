@@ -22,7 +22,7 @@ public class Crawler {
     public static final int maxBatchSize = 50;
 
     private static final Logger LOGGER = Logger.getLogger(Crawler.class.getName());
-    private static final long defaultTimeoutMillis = (long) (60 * 1000);
+    private static final long defaultTimeoutMillis = (long) (15 * 1000);
 
     private final String sourceTitle;
     private final String destTitle;
