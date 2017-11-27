@@ -6,7 +6,7 @@ Below is a path from Programming to Happiness:
 
 ![Demo Animation](images/animation-demo.gif "Demo Animation")
 
-To find this path, the Wikiracer prgram starts a breadth-first search at both the start page and destination page. As soon as it finds an intersection between the two searches, it returns the path.
+To find this path, the Wikiracer program starts a breadth-first search at both the start page and destination page. As soon as it finds an intersection between the two searches, it returns the path.
 
 Given an input sourceTitle and destTitle, Wikiracer offers the following three features:
 1. Find path from sourceTitle to destTitle
@@ -120,13 +120,13 @@ In case of a timeout failure, you'll receive the below response. Note that "stat
 
 ## Considerations in Code Design
 ### Designing Code to Scale
-For this build I did not set up a persistent back-end database; rather, I maintained in memory all of the necessary data structures (e.g. queue tracking nodes to visit, hash map tracking visited nodes). Along with the multi-threading enhancements discussed below, I achieved sufficient performance using these in-memory data structures.
+For this build I did not set up a persistent back-end database; rather, I maintained in memory all of the necessary data structures (e.g. queue tracking nodes to visit, hash map tracking visited nodes). Along with the multithreading enhancements discussed below, I achieved sufficient performance using these in-memory data structures.
 
 However, I intentionally abstracted out the CrawlerState class to allow for additional scaling in the future. That is, no methods outside CrawlerState directly touch the actual queue/hash map implementations. Rather, they must interact with the database through the CrawlerState's API.
 
 Hence, if I were to further scale this service (e.g. add boxes to scale horizontally), it would be a relatively painless task to simply update the CrawlerState methods to interact with whatever database (e.g. Redis).
 
-### Multi-Threading 
+### Multithreading 
 I originally implemented this bidirectional BFS along a single thread. The program first visited the Wiki page for the source title, then added any links on that page to a queue of titles to visit. It then dequeued the next set of titles to visit, called the Wiki API on these titles, added these latest new links to the queue, and so on.
 
 Based on my testing, the slowest part was in waiting for the Wiki API to return a response. Since the Wiki API permits batching, I achieved some performance gains by requesting a response for batches of 50 titles--instead of making requests on one title at a time.
@@ -146,7 +146,7 @@ To further improve this, I decided to spawn multiple threads making API requests
 	};
 	taskExecutor.execute(task);
 ```		
-There were also additional complexities with multi-threading, including:
+There were also additional complexities with multithreading, including:
 * Managing synchronization of the queue (since multiple threads were writing to it)
 * Ensuring that all threads returned _as soon as possible_ when any thread discovered the path between source and destination title 
 * Ensuring that all threads terminated gracefully
