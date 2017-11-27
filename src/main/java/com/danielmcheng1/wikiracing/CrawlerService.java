@@ -23,7 +23,7 @@ public class CrawlerService {
     }
 
     public CrawlerResult getCrawl(String sourceTitle, String destTitle) {
-        CrawlerController crawlerController = new CrawlerController(sourceTitle, destTitle);
+        CrawlerController crawlerController = new CrawlerController(sourceTitle, destTitle, (long) 15);
         crawlerController.runCrawl();
         return crawlerController.getResult();
     }
