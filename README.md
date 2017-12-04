@@ -40,14 +40,9 @@ cd wikiracer
 mvn clean install
 ```
 
-Alternatively, if you do not wish to use Maven, you can clone the repository, then execute the following commands to test the code:
-```Linux
-cd wikiracer
-make test
-```
-
 You can now run the crawler as follows:
 ```
+cd target
 java -jar wikiracing-1.0-SNAPSHOT-jar-with-dependencies.jar -sourceTitle Programming -destTitle Happiness 
 ```
 
@@ -81,7 +76,7 @@ If you're running this on your local machine, fire up a browser and go to localh
 * GET /crawl/sourceTitle/destTitle 
 * GET /crawl/sourceTitle/destTitle/timeout
 
-Alternatively, you can [click on this link](http://ec2-52-39-21-29.us-west-2.compute.amazonaws.com:4567/crawl/apple/orange) to access the EC2 that I already set up to run this REST service.
+Alternatively, you can [click on this link](ec2-35-162-247-201.us-west-2.compute.amazonaws.com:4567/crawl/apple/orange) to access the EC2 that I already set up to run this REST service.
 
 Below is an example response, which shows the path found by the crawler as well as basic stats:
 ```javascript 
