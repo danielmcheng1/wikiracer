@@ -2,6 +2,7 @@ package com.danielmcheng1.wikiracing;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import okhttp3.Response;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Deque;

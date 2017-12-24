@@ -13,8 +13,6 @@ Given an input sourceTitle and destTitle, Wikiracer offers the following three f
 2. View an animated trace of this path 
 3. Expose a REST service to get the path from sourceTitle to destTitle 
 
-Building out all three of these features was extremely fun, particularly in generating an animated trace of the Wikiracer's path. It was satisfying to build out this whole service, not only implementing a bidirectional BFS search algorithm, but also building out a REST API and neat graph visualizations.
-
 
 ## Architecture
 The Wikiracer breaks down into the following well-defined components:
@@ -76,7 +74,7 @@ If you're running this on your local machine, fire up a browser and go to localh
 * GET /crawl/sourceTitle/destTitle 
 * GET /crawl/sourceTitle/destTitle/timeout
 
-Alternatively, you can [click on this link](http://ec2-35-162-247-201.us-west-2.compute.amazonaws.com:4567/crawl/apple/orange) to access the EC2 that I already set up to run this REST service.
+Alternatively, you can [click on this link](http://ec2-52-11-200-166.us-west-2.compute.amazonaws.com:4567/crawl/apple/orange) to access the EC2 that I already set up to run this REST service.
 
 Below is an example response, which shows the path found by the crawler as well as basic stats:
 ```javascript 
@@ -180,17 +178,3 @@ Secondly, the Wikiracer may not perfectly handle all cases--for example, if the 
 This could potentially be fixed in two ways. First, I could test using the "redirects" parameter that the Wiki API offers ([see documentation here](https://www.mediawiki.org/wiki/API:Query#Resolving_redirects)).
 
 Alternatively, I could use the redirected page as the actual title requested by the user. For example, if the user inputs "Pomaceous" as the destination, this would redirect to Pome, and I would use Pome as the destination title (rather than Pomaceous). This code update would be implemented in the Utils.normalizeTitle method, since that already functions to clean up the casing of the user's inputted titles. 
- 
-## Project Timeline 
-Finally, below is a summary of my project timeline and effort.
-* __1 hour__: Research algorithms for wikiracing (e.g. breadth-first search, A* algorithm, precomputing, running a topical search based on human domain knowledge). Sketched out high-level code for BFS algorithm
-* __1 hour__: Tested the Wiki API, set up class to handle these HTTP requests
-* __2 - 3 hours__: Built unidirectional breadth-first search and tested performance (extremely slow, with queries taking upwards of 10 seconds)
-* __2 hours__: Revised crawler to run bidirectional search 
-* __2 - 3 hours__: Set up multithreading and debugged synchronization issues
-* __1 hour__: Added unit tests and end-to-end tests
-* __1 hour__: Refactored code, splitting out classes into logical components
-* __1 hour__: Set up REST API and deployed to EC2 
-* __1 - 2 hours__: Learned how to use the GraphStream module, then built out the animated trace 
-* __1 - 2 hours__: Created writeup and cleaned up code
-
